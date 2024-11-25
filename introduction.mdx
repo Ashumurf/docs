@@ -24,11 +24,19 @@ Murf AI is a [text-to-speech](https://murf.ai/text-to-speech) platform that lets
 
 <Accordion title="Step 2: Retrieve Voice Options">
   To use the Murf API for text-to-speech, you need the `voiceId` for the desired voice. Follow these steps:
-  - Visit the <a href="https://murf.ai/voices">Voices and Styles</a> section on the Murf website to explore available voices and styles.
-  - Use the <a href="https://murf.ai/api/dashboard">text-to-speech component</a> in the API dashboard to preview voices and test settings like pitch, speed, and language.
-  - Alternatively, make a GET request to the `/v1/speech/voices` endpoint to programmatically retrieve all available voices. This provides `voiceId`, name, and styles.
+
+  * Visit the <a href="https://murf.ai/voices">Voices and Styles</a> section on the Murf website to explore available voices and styles.
+
+  * Use the <a href="https://murf.ai/api/dashboard">text-to-speech component</a> in the API dashboard to preview voices and test settings like pitch, speed, and language.
+
+  * Alternatively, make a GET request to the `/v1/speech/voices` endpoint to programmatically retrieve all available voices. This provides `voiceId`, name, and styles.
 </Accordion>
 
+<Accordion title="Step 3: Generate Speech">
+  Once you have the `voiceId`, you can generate speech by sending a POST request to the `/v1/speech/generate` endpoint. Include your API key in the `Authorization` header and specify parameters like text, style, pitch, and rate.
+
+</Accordion>
+  
 
 ***
 
