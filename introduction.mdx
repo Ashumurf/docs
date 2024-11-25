@@ -11,13 +11,24 @@ Murf AI is a [text-to-speech](https://murf.ai/text-to-speech) platform that lets
 
 ### Getting Started
 
-<Accordion title="Step 1: Authenticate with the API">
-To start using the Murf API, you’ll need an API key to authenticate your requests. Follow these steps:
-Create an Account: If you don’t have a Murf account yet, sign up to access the API dashboard.
-Log In: Once you’ve created your account, log in to your dashboard.
-Generate API Key: Navigate to the API documentation page, and on the right side, click the Create API Key button (as shown in the image below) to generate your key.
-All requests to the Murf API must include an Authorization header with your API key. Be sure to include this header manually in each request for authentication. You can manage, restrict, or delete API keys as needed for enhanced security.
-. For more, check out [authentication docs](https://murf.ai/api/reference#authentication).
+<Accordion title="Step 1: Create an API Key">
+  <ul>
+    <li><strong><a href="https://murf.ai/api/signup">Create an Account:</a></strong> If you don’t already have a Murf account, sign up to access the API dashboard.</li>
+    <li><strong><a href="https://murf.ai/api/dashboard">Log In:</a></strong> After creating your account, log in to your dashboard.</li>
+    <li><strong>Generate API Key:</strong>
+      <ul>
+        <li>Navigate to the <a href="https://murf.ai/api/docs">API documentation page</a>.</li>
+        <li>Click the "Create API Key" button on the right side (as shown in the image below) to generate your key.</li>
+      </ul>
+    </li>
+    <li><strong>Authorization Header:</strong> 
+      <ul>
+        <li>All requests to the Murf API must include an <code>Authorization</code> header with your API key.</li>
+        <li>You can manage, restrict, or delete API keys as needed for enhanced security.</li>
+      </ul>
+    </li>
+  </ul>
+  <p>For more details, check out the <a href="https://murf.ai/api/reference#authentication">authentication documentation</a>.</p>
 </Accordion>
 
 <Accordion title="Step 2: Synthesize Your First Audio">
