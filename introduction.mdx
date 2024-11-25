@@ -7,17 +7,18 @@ description: "Deploy high quality voices for your apps, website and other servic
 
 Murf AI is a [text-to-speech](https://murf.ai/text-to-speech) platform that lets you generate lifelike AI voiceovers from text in minutes. Murf's text-to-speech API lets you integrate Murf's versatile voice generation capabilities into your products, applications & workflows to unlock new features for your users.
 
-<CardGroup cols={2}>
-  <Card title="Edit Your Docs" icon="pen-to-square" href="https://mintlify.com/docs/quickstart">
-    Get your docs set up locally for easy development
-  </Card>
 
-  <Card title="Preview Changes" icon="image" href="https://mintlify.com/docs/development">
-    Preview your changes before you push to make sure they're perfect
-  </Card>
-</CardGroup>
+### Getting Started
 
-####
+<Accordion title="Step 1: Authenticate with the API">
+  Obtain an API key by logging into the Murf dashboard. Use the `Create Auth Token` endpoint to generate tokens, which are valid for 30 minutes. For more, check out [authentication docs](https://murf.ai/api/docs).
+</Accordion>
+
+<Accordion title="Step 2: Synthesize Your First Audio">
+  Send a POST request to `/v1/audio/synthesize` with your text and desired voice parameters. For detailed examples, see the [API Reference](https://murf.ai/api/reference#synthesize-audio).
+</Accordion>
+
+#### Features
 
 | Feature          | Description                                             |
 |------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -31,10 +32,11 @@ Murf AI is a [text-to-speech](https://murf.ai/text-to-speech) platform that le
 | Pronunciation    | Customize pronunciation using IPA. Example: `{"live":{"type": "IPA", "pronunciation": "laɪv"}}`.                                        |
 | Audio Duration   | Precisely control audio length with the `audioDuration` parameter. Example: `{"audioDuration": 5}`                                       |
 | Variation        | Introduce natural variations in pitch, speed, and pauses. Example: `{"variation": 5}`                                                   |
-| Output Formats   | Supports MP3, WAV, FLAC, ALAW, ULAW, and Base64 encoding.                                                                               |
+| Output Formats   | Supports MP3, WAV, FLAC, ALAW, ULAW, and Base64 encoding.|
 
 
 ***
+
 
 #### Troubleshooting
 
