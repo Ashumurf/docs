@@ -29,33 +29,6 @@ Murf AI is a [text-to-speech](https://murf.ai/text-to-speech) platform that lets
   - Alternatively, make a GET request to the `/v1/speech/voices` endpoint to programmatically retrieve all available voices. This provides `voiceId`, name, and styles.
 </Accordion>
 
-<Accordion title="Step 3: Generate Speech">
-  Once you have the `voiceId`, you can generate speech by sending a POST request to the `/v1/speech/generate` endpoint. Include your API key in the `Authorization` header and specify parameters like text, style, pitch, and rate.
-
-  Example request in Python:
-
-  ```python
-  import requests
-  import json
-
-  url = "https://api.murf.ai/v1/speech/generate"
-  payload = {
-      "voiceId": "en-US-natalie",
-      "text": "Welcome to the AI E-Learning Course!",
-      "style": "Promo",
-      "rate": 0,
-      "pitch": 0,
-      "sampleRate": 48000,
-      "format": "MP3"
-  }
-  headers = {
-      "Authorization": "Bearer YOUR_API_KEY",
-      "Content-Type": "application/json"
-  }
-  response = requests.post(url, headers=headers, json=payload)
-  print(response.json())
-For detailed examples, see the API Reference. 
-</Accordion>
 
 ***
 
