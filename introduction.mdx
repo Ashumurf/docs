@@ -13,14 +13,48 @@ Murf AI is a [text-to-speech](https://murf.ai/text-to-speech) platform that lets
 
 <Accordion title="Step 1: Create an API Key">
   To start using the Murf API, you’ll need an API key to authenticate your requests. Follow these steps:
-  - <a href="https://murf.ai/api/signup">Create an account</a> if you don’t already have one.
-  - <a href="https://murf.ai/api/dashboard">Log in</a> to your Murf dashboard.
-  - Navigate to the <a href="https://murf.ai/api/docs">API documentation page</a> and click the "Create API Key" button to generate your key.
-  Use this API key in the `Authorization` header for all API requests. For more details, check out the <a href="https://murf.ai/api/reference#authentication">authentication docs</a>.
+
+  * <a href="https://murf.ai/api/signup">Create an account</a> if you don’t already have one.
+
+  * <a href="https://murf.ai/api/dashboard">Log in</a> to your Murf dashboard.
+
+  * Navigate to the <a href="https://murf.ai/api/docs">API documentation page</a> and click the "Create API Key" button to generate your key.
+    Use this API key in the `Authorization` header for all API requests. For more details, check out the <a href="https://murf.ai/api/reference#authentication">authentication docs</a>.
 </Accordion>
 
-<Accordion title="Step 2: Synthesize Your First Audio">
-  Send a POST request to `/v1/speech/generate` with your text and desired voice parameters. For detailed examples, see the [API Reference](https://murf.ai/api/reference#synthesize-audio).
+<Accordion title="Step 2: Retrieve Voice Options">
+  To use the Murf API for text-to-speech, you need the `voiceId` for the desired voice. Follow these steps:
+  - Visit the <a href="https://murf.ai/voices">Voices and Styles</a> section on the Murf website to explore available voices and styles.
+  - Use the <a href="https://murf.ai/api/dashboard">text-to-speech component</a> in the API dashboard to preview voices and test settings like pitch, speed, and language.
+  - Alternatively, make a GET request to the `/v1/speech/voices` endpoint to programmatically retrieve all available voices. This provides `voiceId`, name, and styles.
+</Accordion>
+
+<Accordion title="Step 3: Generate Speech">
+  Once you have the <code>voiceId</code>, you can generate speech by sending a POST request to the <code>/v1/speech/generate</code> endpoint. Include your API key in the <code>Authorization</code> header and specify parameters like text, style, pitch, and rate. 
+  <br />
+  Example:
+  <pre><code class="language-python">
+import requests
+import json
+
+url = "https://api.murf.ai/v1/speech/generate"
+payload = {
+    "voiceId": "en-US-natalie",
+    "text": "Welcome to the AI E-Learning Course!",
+    "style": "Promo",
+    "rate": 0,
+    "pitch": 0,
+    "sampleRate": 48000,
+    "format": "MP3"
+}
+headers = {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Content-Type': 'application/json'
+}
+response = requests.post(url, headers=headers, json=payload)
+print(response.json())
+  </code></pre>
+  For detailed examples, see the <a href="https://murf.ai/api/reference#synthesize-audio">API Reference</a>.
 </Accordion>
 
 ***
