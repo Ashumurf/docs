@@ -1,87 +1,94 @@
 ---
 title: "Introduction"
-description: "Deploy high quality voices for your apps, website and other services at scale. Engage your users with Murf's natural sounding voiceovers for chatbots, virtual assistants, virtual reality systems, metaverse games, automobiles, public announcements, IVR and more."
+description: "Deploy high-quality voices for your apps, websites, and other services at scale. Engage your users with Murf's natural-sounding voiceovers for chatbots, virtual assistants, VR systems, metaverse games, automobiles, public announcements, IVR, and more."
 ---
 
 ##### Overview
 
-Murf AI is a [text-to-speech](https://murf.ai/text-to-speech) platform that lets you generate lifelike AI voiceovers from text in minutes. Murf's text-to-speech API lets you integrate Murf's versatile voice generation capabilities into your products, applications & workflows to unlock new features for your users.
+Murf AI is a [text-to-speech](https://murf.ai/text-to-speech) platform that lets you generate lifelike AI voiceovers from text in minutes. With the Murf API, you can integrate versatile voice generation capabilities into your products, applications, and workflows to enhance user experiences and enable innovative features.
 
+<FeatureGroup>
+  <Feature
+    title="Audio Quality"
+    description="Supports sampling rates of 8Khz, 24Khz, 44.1Khz, and 48Khz for crystal-clear audio output."
+    icon="waveform-lines"
+  />
+  <Feature
+    title="Voice Options"
+    description="Choose from 120+ voices in 8 languages and 20+ styles, each with native accents."
+    icon="language"
+  />
+  <Feature
+    title="Voice Styles"
+    description="From meditative to promo, explore styles that match your content perfectly."
+    icon="paintbrush"
+  />
+  <Feature
+    title="Custom Pronunciation"
+    description="Refine pronunciation with IPA for precise and natural speech."
+    icon="spell-check"
+  />
+</FeatureGroup>
+
+---
 
 ### Getting Started
 
 <Accordion title="Step 1: Authenticate with the API">
-  Obtain an API key by logging into the Murf dashboard. Use the `Create Auth Token` endpoint to generate tokens, which are valid for 30 minutes. For more, check out [authentication docs](https://murf.ai/api/docs).
+  Obtain an API key by logging into the Murf dashboard. Use the `Create Auth Token` endpoint to generate tokens, which are valid for 30 minutes. For more, check out [authentication docs](https://murf.ai/api/reference#authentication).
 </Accordion>
 
 <Accordion title="Step 2: Synthesize Your First Audio">
   Send a POST request to `/v1/audio/synthesize` with your text and desired voice parameters. For detailed examples, see the [API Reference](https://murf.ai/api/reference#synthesize-audio).
 </Accordion>
 
-#### Features
+---
+
+### Key Features
 
 | Feature          | Description                                             |
 |------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| Audio Quality    | Sampling rates include 8Khz, 24Khz, 44.1Khz, and 48Khz.|
-| Voice Options    | Murf API offers 120+ realistic voices in 8 languages and 20+ styles, with flawless native accents to match any type of content.|
-| Voice Styles     | Choose from styles like storytelling, terrified, meditative, inspirational, angry, newscast formal, promo, casual, narration, and more. |
-| Languages        | Voices available in English (US/Canada, UK, Australia, India, Scottish), French (France), German, Spanish (Mexico, Spain), Italian, Hindi, Portuguese (Brazil), and Polish. |
-| Speed            | Adjust the speed of voiceovers to match the rhythm and flow of your message.                                                             |
-| Pitch            | Modify the pitch to add depth or emotion to your storytelling.                                                                          |
-| Pause            | Insert strategic pauses for emphasis or clarity. Example: `Hello [pause 1.0s], How are you doing?`                                      |
-| Pronunciation    | Customize pronunciation using IPA. Example: `{"live":{"type": "IPA", "pronunciation": "laɪv"}}`.                                        |
-| Audio Duration   | Precisely control audio length with the `audioDuration` parameter. Example: `{"audioDuration": 5}`                                       |
-| Variation        | Introduce natural variations in pitch, speed, and pauses. Example: `{"variation": 5}`                                                   |
-| Output Formats   | Supports MP3, WAV, FLAC, ALAW, ULAW, and Base64 encoding.|
+| **Audio Quality**    | Sampling rates include 8Khz, 24Khz, 44.1Khz, and 48Khz.|
+| **Voice Options**    | Offers 120+ realistic voices in 8 languages and 20+ styles, with flawless native accents.|
+| **Voice Styles**     | Includes storytelling, meditative, newscast formal, promo, casual, narration, and more. |
+| **Languages**        | Supports English (US/Canada, UK, Australia, India), French, German, Spanish, Italian, Hindi, Portuguese, and Polish. |
+| **Speed & Pitch**    | Control speed and pitch for tailored outputs.                                                             |
+| **Output Formats**   | Supports MP3, WAV, FLAC, ALAW, ULAW, and Base64 encoding.|
 
+---
 
-***
+### Troubleshooting
 
+#### Token Expiration
 
-#### Troubleshooting
+Auth tokens generated by the [Create Auth Token](https://murf.ai/api/reference#create-auth-token) endpoint expire 30 minutes after creation. Ensure token regeneration to prevent disruptions.
 
-In this section, we will tackle common problems that you might experience while integrating Murf's API into your systems.
+---
 
-###### Token Expiration
+### FAQ
 
-The auth tokens generated by [Create Auth Token operation](https://murf.ai/api/reference)  will expire 30 minutes from creation. Make sure to regenerate a new token using that same endpoint to prevent disruption of service.
+<Accordion title="Can I try the API before purchasing?">
+  Yes, Murf AI offers a free trial plan with 10,000 characters included. No credit card is required, and there's no time limit on the trial.
+</Accordion>
 
-###### CORS Error
+<Accordion title="What is the pricing model for the API?">
+  Murf API uses a Pay-as-you-go model. For detailed pricing, visit the [pricing page](https://murf.ai/api/account?qState=upgrade). For custom solutions, [contact us](https://murf.ai/enterprise).
+</Accordion>
 
-Even if you've obtained an API key, there can be instances where your requests are being blocked due to CORS. For development and testing, localhost:3000 is whitelisted by default, requests can be sent from there. For production environments, make sure the origin domain is approved as a request origin by Murf. You can provide a set of domains and they will be approved for use by Murf.
+<Accordion title="Do I own the audio output files?">
+  Yes, you own the audio output files. However, users must be informed that the audio is AI-generated.
+</Accordion>
 
-Caution
+---
 
-While it is possible to build workflows that access Murf API from the browser, we recommend the usage of server-side languages to integrate Murf API into your business logic.
-
-#### FAQ
-
-###### Can I try API before purchasing?
-
-Murf AI provides a generous free trial plan, allowing users to experience the API capabilities. This plan includes 10,000 characters, enabling users to test the functionality and performance of the API without any cost. No credit card required. No days limit on the trial.
-
-###### What is the pricing for API?
-
-Murf API offers a Pay-as-you-go model which is ideal for users with varying needs. Users top-up their wallet and will be charged based on the number of characters sent to the service to be synthesised into audio. Check out the Murf API [pricing page](https://murf.ai/api/account?qState=upgrade) for more details. You can also  [contact us](https://murf.ai/enterprise)  for large scale requirements or a tailored plan.
-
-###### Do I own the audio output files?
-
-Yes, the person who created them owns the output. You are still required to inform end users that they are hearing an audio generated by AI and not a real person talking to them.
+### Next Steps
 
 <CardGroup cols={2}>
-  <Card title="Customize Style" icon="palette" href="https://mintlify.com/docs/settings/global">
-    Customize your docs to your company's colors and brands
-  </Card>
-
-  <Card title="Reference APIs" icon="code" href="https://mintlify.com/docs/api-playground/openapi">
-    Automatically generate endpoints from an OpenAPI spec
+  <Card title="Customize Your Docs" icon="palette" href="https://mintlify.com/docs/settings/global">
+    Learn how to match your docs to your company's branding.
   </Card>
 
   <Card title="Add Components" icon="screwdriver-wrench" href="https://mintlify.com/docs/components/accordion">
-    Build interactive features and designs to guide your users
-  </Card>
-
-  <Card title="Get Inspiration" icon="stars" href="https://mintlify.com/customers">
-    Check out our showcase of our favorite documentation
+    Build dynamic and interactive documentation components.
   </Card>
 </CardGroup>
