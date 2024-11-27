@@ -29,13 +29,6 @@
     {
       "name": "API Reference",
       "url": "api-reference"
-    }
-  ],
-  "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
     },
     {
       "name": "Community",
@@ -48,6 +41,13 @@
       "url": "https://murf.ai/resources/"
     }
   ],
+  "anchors": [
+    {
+      "name": "Documentation",
+      "icon": "book-open-cover",
+      "url": "https://mintlify.com/docs"
+    }
+],
   "navigation": [
     {
       "group": "Text to Speech",
