@@ -53,8 +53,7 @@
       "group": "Text to Speech",
       "pages": [
         "introduction",
-        "quickstart",
-        "development"
+        "Advanced Feature",
       ]
     },
     {
