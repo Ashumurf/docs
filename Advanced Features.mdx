@@ -1,0 +1,132 @@
+## Advanced Features
+
+While generating lifelike voiceovers is exciting on its own, Murf API lets you customize your API calls so that the generated voiceovers are tailored to your use cases.
+
+### Pronunciations
+
+Custom pronunciations can be used to improve the pronunciation of certain words in your script to better suit the context or accent. The `pronunciationDictionary` key in the Synthesize Speech operation's request body is used to specify custom pronunciations.
+
+Users can specify custom pronunciations as an IPA or an alternate word. IPA is an internationally recognized set of phonetic symbols based on the principle of strict one-to-one correspondence between sounds and symbols.
+
+Pronunciations can be specified in a key-value pair format, where the key is the word that needs to be changed, and the value is an object that specifies the pronunciation type and value.
+
+#### Example
+
+```json
+{
+  "pronunciationDictionary": {
+    "live": { "type": "IPA", "pronunciation": "laɪv" },
+    "2022": { "type": "SAY_AS", "pronunciation": "twenty twenty two" }
+  }
+}
+```
+
+### Pauses
+
+Pauses can be added between words in your script to enhance the delivery of the generated voiceover. This is done using Murf's pause syntax: `[pause <duration>]`. You can specify how long you want the pause to be in seconds by replacing the `<duration>` part of the syntax.
+
+The pause duration can be set to any value between **0.1s to 5s**, allowing you to fine-tune the timing of your voiceover for a natural flow or specific dramatic effects.
+
+#### How to Use Pauses
+
+1. Include the pause syntax `[pause <duration>]` in the `text` key of your Synthesize Speech operation request body.
+
+2. Replace `<duration>` with the desired length of the pause in seconds.
+
+3. Submit the request, and the generated voiceover will include the specified pause.
+
+#### Example
+
+````json
+{
+  "text": "The journey was long and arduous [pause 2s] but ultimately rewarding."
+}
+````
+
+### Variation
+The `variation` parameter adjusts the dynamics of the generated voiceover, incorporating changes in **pause**, **pitch**, and **speed**. A higher variation value results in a more natural and expressive voice output, simulating a human-like speaking style.
+
+#### Key Features of Variation
+- **Valid values**: An integer between `0` and `5`.
+- **Default value**: `1`.
+- **Higher values**: Increase the value to add more variation in voice style, resulting in noticeable shifts in pauses, pitch, and speed for a more dynamic delivery.
+- **Availability**: This feature is available only for the **Gen2 model**.
+
+#### How to Use Variation
+1. Include the `variation` key in the request body of the Synthesize Speech operation.
+2. Set the value of `variation` to an integer between `0` (no variation) and `5` (maximum variation).
+3. Submit the request, and the generated audio will reflect the specified level of variation.
+
+#### Example
+```json
+{
+  "variation": 3
+}
+```
+
+### Audio Duration
+The `audioDuration` parameter allows developers to specify the desired length of the generated audio in seconds. The system adjusts the speech to fit the specified duration, making it easier to synchronize voiceovers with specific audio or video timelines.
+
+#### Key Features of Audio Duration
+- **Valid values**: A double value representing time in seconds.
+- **Guideline**: ~150 words of text typically generate around 60 seconds of audio.
+- **Availability**: This feature is available only for the **Gen2 model**.
+
+#### How to Use Audio Duration
+1. Include the `audioDuration` key in the request body of the Synthesize Speech operation.
+2. Set the value to the desired audio length in seconds.
+3. Submit the request, and the system will attempt to match the duration of the generated audio to the specified value.
+
+#### Example
+```json
+{
+  "audioDuration": 5.0
+}
+```
+
+### Base64 Encoding
+The `encodeAsBase64` parameter allows developers to receive the generated audio as a Base64-encoded string instead of an audio URL. This is particularly useful for scenarios where you want to embed the audio directly into your application or transfer it as a string.
+
+#### Key Features of Base64 Encoding
+- Converts the generated audio file into a Base64-encoded string.
+- Ideal for embedding audio directly into applications without requiring additional storage or URL handling.
+
+#### How to Use Base64 Encoding
+1. Include the `encodeAsBase64` key in the request body of the Synthesize Speech operation.
+2. Set the value to `true` to enable Base64 encoding.
+3. Submit the request, and the response will contain the generated audio in Base64 format.
+
+#### Example
+```json
+{
+  "voiceId": "en-US-julie",
+  "text": "This audio will be returned as a base64 string",
+  "encodeAsBase64": true
+}
+```
+
+### gzip Support
+The Murf API supports gzip compression for responses, which can significantly reduce the size of the returned data. This is especially beneficial when returning large audio responses as Base64-encoded strings.
+
+#### Key Features of gzip Support
+- Compresses API responses to reduce payload size.
+- Improves network performance and reduces bandwidth usage, particularly for Base64-encoded audio data.
+- Works with any client that supports gzip decoding.
+
+#### How to Use gzip Support
+1. Add the `"accept-encoding": "gzip"` header to your API request.
+2. Submit the request, and the API response will be gzipped if supported by the client.
+3. Ensure your client application can decompress gzip-encoded responses.
+
+#### Example Request Headers
+```json
+{
+  "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "accept-encoding": "gzip",
+    "token": "TOKEN"
+  }
+}
+
+```
