@@ -47,38 +47,26 @@
       "icon": "book-open-cover",
       "url": "https://mintlify.com/docs"
     }
-],
+  ],
   "navigation": [
     {
       "group": "Text to Speech",
-      "pages": [
-        "introduction",
-        "Features"
-      ]
-    },
-    {
-      "group": "Essentials",
-      "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
-      ]
+      "pages": ["introduction", "Features"]
     },
     {
       "group": "API Documentation",
-      "pages": [
-        "api-reference/introduction"
-      ]
+      "pages": ["api-reference/introduction"]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Authentication Resource",
+      "pages": ["api-reference/authentication-resource/generate-auth-token"]
+    },
+    {
+      "group": "Speech Resource",
       "pages": [
-        "api-reference/endpoint/auth_token",
-        "api-reference/endpoint/list_voices",
-        "api-reference/endpoint/synthesize_speech"
+        "api-reference/speech-resource/synthesize-speech",
+        "api-reference/speech-resource/synthesize-speech-with-api-key",
+        "api-reference/speech-resource/list-voices"
       ]
     }
   ],
