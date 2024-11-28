@@ -82,7 +82,7 @@
       ]
     }
   ],
-  "openapi": "api-reference/openapi.json",
+  <!-- "openapi": "api-reference/openapi.json", -->
   "footerSocials": {
     "x": "https://x.com/mintlify",
     "github": "https://github.com/mintlify",
