@@ -1,194 +1,518 @@
 {
-  "openapi": "3.0.1",
-  "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
+  "openapi" : "3.0.1",
+  "info" : {
+    "contact" : {
+      "url" : "https://murf.ai/text-to-speech-api"
     },
-    "version": "1.0.0"
+    "description" : "Murf API lets you generate AI-based voiceovers from text. Discover how you can use and integrate Murf API into your applications.",
+    "license" : {
+      "name" : "Murf API terms of use",
+      "url" : "https://murf.ai/resources/terms_of_service/"
+    },
+    "title" : "Murf Speech Synthesis API",
+    "version" : "1.0.0"
   },
-  "servers": [
-    {
-      "url": "http://sandbox.mintlify.com"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
-    }
-  ],
-  "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
+  "servers" : [ {
+    "description" : "Default server",
+    "url" : "https://api.murf.ai/"
+  } ],
+  "paths" : {
+    "/v1/auth/token" : {
+      "get" : {
+        "description" : "Generates an auth token for authenticating your requests",
+        "operationId" : "createAuthToken",
+        "parameters" : [ {
+          "in" : "header",
+          "name" : "api-key",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AuthTokenResponse"
+                }
+              }
+            },
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "Bad request or missing api-key header"
+          },
+          "401" : {
+            "description" : "Bad api-key provided"
+          },
+          "503" : {
+            "description" : "Service Unavailable"
+          },
+          "default" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AuthTokenResponse"
+                }
+              }
             }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
+        },
+        "summary" : "Generate auth token",
+        "tags" : [ "Authentication Resource" ]
+      }
+    },
+    "/v1/ping" : {
+      "get" : {
+        "operationId" : "ping",
+        "responses" : {
+          "default" : {
+            "content" : {
+              "text/plain" : { }
+            },
+            "description" : "default response"
+          }
+        }
+      }
+    },
+    "/v1/ping/swagger.json" : {
+      "get" : {
+        "operationId" : "swaggerJson",
+        "responses" : {
+          "default" : {
+            "content" : {
+              "*/*" : { }
+            },
+            "description" : "default response"
+          }
+        }
+      }
+    },
+    "/v1/speech/generate" : {
+      "post" : {
+        "description" : "Returns a url to the generated audio file along with other associated properties.",
+        "operationId" : "generateSpeech",
+        "parameters" : [ {
+          "in" : "header",
+          "name" : "token",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "header",
+          "name" : "api-key",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/GenerateSpeechRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GenerateSpeechResponse"
+                }
+              }
+            },
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "402" : {
+            "description" : "Expired subscription or character limit exhausted"
+          },
+          "403" : {
+            "description" : "Invalid or expired token/api-key provided"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          },
+          "503" : {
+            "description" : "Service Unavailable"
+          },
+          "default" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GenerateSpeechResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary" : "Synthesize Speech",
+        "tags" : [ "Speech Resource" ]
+      }
+    },
+    "/v1/speech/generate-with-key" : {
+      "post" : {
+        "deprecated" : true,
+        "description" : "Returns a url to the generated audio file along with other associated properties. This endpoint accepts the `api-key` in the header, instead of the auth token.",
+        "operationId" : "generateWithKey",
+        "parameters" : [ {
+          "in" : "header",
+          "name" : "api-key",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/GenerateSpeechRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GenerateSpeechResponse"
+                }
+              }
+            },
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "402" : {
+            "description" : "Expired subscription or character limit exhausted"
+          },
+          "403" : {
+            "description" : "Invalid or expired token provided"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          },
+          "503" : {
+            "description" : "Service Unavailable"
+          },
+          "default" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GenerateSpeechResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary" : "Synthesize Speech with API Key",
+        "tags" : [ "Speech Resource" ]
+      }
+    },
+    "/v1/speech/voices" : {
+      "get" : {
+        "description" : "Returns a list of available voices for speech synthesis",
+        "operationId" : "listVoices",
+        "parameters" : [ {
+          "in" : "header",
+          "name" : "token",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "header",
+          "name" : "api-key",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ApiVoice"
+                  }
+                }
+              }
+            },
+            "description" : "Ok"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Invalid or expired token provided"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          },
+          "503" : {
+            "description" : "Service Unavailable"
+          },
+          "default" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ApiVoice"
                   }
                 }
               }
             }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
           }
-        }
-      },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          },
-          "required": true
         },
-        "responses": {
-          "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
+        "summary" : "List voices",
+        "tags" : [ "Speech Resource" ]
       }
     }
   },
-  "components": {
-    "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
+  "components" : {
+    "schemas" : {
+      "ApiVoice" : {
+        "type" : "object",
+        "properties" : {
+          "accent" : {
+            "type" : "string",
+            "deprecated" : true
           },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
+          "availableStyles" : {
+            "type" : "array",
+            "deprecated" : true,
+            "items" : {
+              "type" : "string",
+              "deprecated" : true
+            }
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "displayLanguage" : {
+            "type" : "string",
+            "deprecated" : true
+          },
+          "displayName" : {
+            "type" : "string"
+          },
+          "gender" : {
+            "type" : "string",
+            "enum" : [ "Male", "Female", "NonBinary" ]
+          },
+          "locale" : {
+            "type" : "string"
+          },
+          "supportedLocales" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "$ref" : "#/components/schemas/StyleDetails"
+            }
+          },
+          "voiceId" : {
+            "type" : "string"
           }
         }
       },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
+      "AuthTokenResponse" : {
+        "type" : "object",
+        "properties" : {
+          "expiryInEpochMillis" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "The timestamp at which the generated token will expire - in Unix time."
           },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
+          "token" : {
+            "type" : "string"
+          }
+        }
+      },
+      "GenerateSpeechRequest" : {
+        "type" : "object",
+        "properties" : {
+          "audioDuration" : {
+            "type" : "number",
+            "format" : "double",
+            "description" : "This parameter allows specifying the duration (in seconds) for the generated audio. If the value is 0, this parameter will be ignored. Only available for Gen2 model.",
+            "minimum" : 0
+          },
+          "channelType" : {
+            "type" : "string",
+            "default" : "MONO",
+            "description" : "Valid values: STEREO, MONO"
+          },
+          "encodeAsBase64" : {
+            "type" : "boolean",
+            "description" : "Set to true to receive audio in response as a Base64 encoded string instead of a url."
+          },
+          "format" : {
+            "type" : "string",
+            "default" : "WAV",
+            "description" : "Format of the generated audio file. Valid values: MP3, WAV, FLAC, ALAW, ULAW"
+          },
+          "locale" : {
+            "type" : "string",
+            "writeOnly" : true
+          },
+          "modelVersion" : {
+            "type" : "string",
+            "default" : "GEN2",
+            "description" : "Valid values: GEN1, GEN2. Use GEN2 to generate audio using new and advanced model. Outputs from Gen 2 will sound better, but different from the old model",
+            "enum" : [ "GEN1", "GEN2" ]
+          },
+          "multiNativeLocale" : {
+            "type" : "string",
+            "description" : "Optionally pass a locale for multi locale voices. If provided, the locale should match the locale of the text being synthesised"
+          },
+          "pitch" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "Pitch of the voiceover",
+            "maximum" : 50,
+            "minimum" : -50
+          },
+          "pronunciationDictionary" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "$ref" : "#/components/schemas/PronunciationDetail"
+            },
+            "description" : "An object used to define custom pronunciations. \n\n Example 1: {\"live\":{\"type\": \"IPA\", \"pronunciation\": \"laɪv\"}}. \n\n Example 2: {\"2022\":{\"type\": \"SAY_AS\", \"pronunciation\": \"twenty twenty two\"}}"
+          },
+          "rate" : {
+            "type" : "integer",
+            "format" : "int32",
+            "description" : "Speed of the voiceover",
+            "maximum" : 50,
+            "minimum" : -50
+          },
+          "sampleRate" : {
+            "type" : "number",
+            "format" : "double",
+            "default" : 24000,
+            "description" : "Valid values are 8000, 24000, 44100, 48000"
+          },
+          "style" : {
+            "type" : "string",
+            "description" : "The voice style to be used for voiceover generation."
+          },
+          "text" : {
+            "type" : "string",
+            "description" : "The text that is to be synthesised. e.g. 'Hello there [pause 1s] friend'"
+          },
+          "variation" : {
+            "type" : "integer",
+            "format" : "int32",
+            "default" : 1,
+            "description" : "Higher values will add more variation in terms of Pause, Pitch, and Speed to the voice. Only available for Gen2 model.",
+            "maximum" : 5,
+            "minimum" : 0
+          },
+          "voiceId" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "text", "voiceId" ]
+      },
+      "GenerateSpeechResponse" : {
+        "type" : "object",
+        "properties" : {
+          "audioFile" : {
+            "type" : "string",
+            "format" : "url"
+          },
+          "audioLengthInSeconds" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "consumedCharacterCount" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "Number of characters consumed so far in the current billing cycle."
+          },
+          "encodedAudio" : {
+            "type" : "string"
+          },
+          "remainingCharacterCount" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "Remaining number of characters available for synthesis in the current billing cycle."
+          },
+          "warning" : {
+            "type" : "string"
+          },
+          "wordDurations" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/WordDuration"
             }
           }
-        ]
+        }
       },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
+      "PronunciationDetail" : {
+        "type" : "object",
+        "description" : "An object used to define custom pronunciations. \n\n Example 1: {\"live\":{\"type\": \"IPA\", \"pronunciation\": \"laɪv\"}}. \n\n Example 2: {\"2022\":{\"type\": \"SAY_AS\", \"pronunciation\": \"twenty twenty two\"}}",
+        "properties" : {
+          "pronunciation" : {
+            "type" : "string"
           },
-          "message": {
-            "type": "string"
+          "type" : {
+            "type" : "string",
+            "enum" : [ "IPA", "SAY_AS" ]
           }
         }
-      }
-    },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
+      },
+      "StyleDetails" : {
+        "type" : "object",
+        "properties" : {
+          "availableStyles" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "detail" : {
+            "type" : "string"
+          }
+        }
+      },
+      "WordDuration" : {
+        "type" : "object",
+        "properties" : {
+          "endMs" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "pitchScaleMaximum" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "pitchScaleMinimum" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "sourceWordIndex" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "startMs" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "word" : {
+            "type" : "string"
+          }
+        }
       }
     }
   }
