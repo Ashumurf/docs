@@ -76,12 +76,13 @@
     {
       "group": "Endpoint Examples",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/endpoint/auth_token",
+        "api-reference/endpoint/list_voices",
+        "api-reference/endpoint/synthesize_speech"
       ]
     }
   ],
+  "openapi": "api-reference/openapi.json",
   "footerSocials": {
     "x": "https://x.com/mintlify",
     "github": "https://github.com/mintlify",
