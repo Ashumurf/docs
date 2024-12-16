@@ -6,15 +6,14 @@
     "light": "/logo/light.svg"
   },
   "favicon": "/favicon.svg",
- "colors": {
-  "primary": "#6C5CE7",   // Vibrant purple
-  "light": "#A29BFE",     // Light lavender
-  "dark": "#4E44CE",      // Deep purple-blue
-  "anchors": {
-    "from": "#6C5CE7",
-    "to": "#00CEC9"        // Teal for gradient contrast
-  }
-}
+  "colors": {
+    "primary": "#6C5CE7",
+    "light": "#A29BFE",
+    "dark": "#4E44CE",
+    "anchors": {
+      "from": "#6C5CE7",
+      "to": "#00CEC9"
+    }
   },
   "topbarLinks": [
     {
