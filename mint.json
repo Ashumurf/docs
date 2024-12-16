@@ -6,14 +6,15 @@
     "light": "/logo/light.svg"
   },
   "favicon": "/favicon.svg",
-  "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
-    "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
-    }
+ "colors": {
+  "primary": "#6C5CE7",   // Vibrant purple
+  "light": "#A29BFE",     // Light lavender
+  "dark": "#4E44CE",      // Deep purple-blue
+  "anchors": {
+    "from": "#6C5CE7",
+    "to": "#00CEC9"        // Teal for gradient contrast
+  }
+}
   },
   "topbarLinks": [
     {
@@ -39,7 +40,13 @@
       "name": "Blog",
       "icon": "newspaper",
       "url": "https://murf.ai/resources/"
+    },
+    {
+      "name": "Changelog",
+      "icon": "update",
+      "url": "changelog"
     }
+    
   ],
   "anchors": [
     {
@@ -51,8 +58,49 @@
   "navigation": [
     {
       "group": "Text to Speech",
-      "pages": ["introduction", "Features"]
+      "pages": ["introduction",
+      "overview",
+      "quickstart",
+      "getting-first-api-key",
+      "authenticate-request",
+      "getting-voice-id",
+      "get-first-response",
+      "features",
+      "tts-output"]
     },
+    {
+      "group": "Speech to Speech",
+      "pages": ["sts-introduction",
+      "sts-overview","sts-quickstart","sts-setup","sts-features",
+      "sts-output"]
+    },
+    {
+      "group": "More APIs",
+      "pages": ["more-api-introduction"]
+    },
+     {
+      "group": "SDK Library",
+      "pages": ["python-library","java-library","nodejs-library"]
+    },
+    {
+      "group": "Developer Guide",
+      "pages": [
+      "how-to-use-features-in-tts",
+      "how-to-use-features-in-sts"]
+    },
+    {
+      "group": "Voices and Styles",
+      "pages": ["voices-list"]
+    },
+     {
+      "group": "Limits",
+      "pages": ["limits_overview"]
+    },
+     {
+      "group": "Troubleshooting and FAQs",
+      "pages": ["troubleshooting","FAQs"]
+    },
+    
     {
       "group": "API Documentation",
       "pages": ["api-reference/introduction"]
